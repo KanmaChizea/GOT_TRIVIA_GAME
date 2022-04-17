@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.got_trivia_game">
    <application
-        android:label="got_trivia_game"
-        android:name="GOT Trivia"
+        android:label="GOT trivia"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

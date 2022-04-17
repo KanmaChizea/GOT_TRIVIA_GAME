@@ -14,40 +14,37 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.black,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(15, 40, 15, 30),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: size.height / 2, child: const GOTtext()),
-                const SizedBox(height: 15),
-                const Text('TRIVIA',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontFamily: 'FasterOne',
-                    )),
-                const SizedBox(height: 10),
-                const Text('Guess who said what',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'PlayBall',
-                        letterSpacing: 1.0)),
-                const SizedBox(height: 50),
-                ElevatedButton(
-                    style: elevatedButtonStyle(),
-                    onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const TriviaController()),
-                        (route) => false),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        Text('START'),
-                        Icon(Icons.arrow_forward)
-                      ],
-                    ))
-              ]),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Flexible(child: Container()),
+            SizedBox(height: size.height / 2, child: const GOTtext()),
+            const SizedBox(height: 15),
+            const Text('TRIVIA',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontFamily: 'FasterOne',
+                )),
+            const SizedBox(height: 10),
+            const Text('Guess who said what',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'PlayBall',
+                    letterSpacing: 1.0)),
+            const SizedBox(height: 50),
+            ElevatedButton(
+                style: elevatedButtonStyle(),
+                onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const TriviaController()),
+                    (route) => false),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [Text('START'), Icon(Icons.arrow_forward)],
+                )),
+            Flexible(child: Container())
+          ]),
         ));
   }
 }
