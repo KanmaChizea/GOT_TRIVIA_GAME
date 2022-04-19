@@ -10,9 +10,8 @@ class GOTtext extends StatelessWidget {
     return Stack(
       children: [
         Center(child: Image.asset('lib/assets/logo.png')),
-        Positioned(
-          bottom: 150,
-          left: 45,
+        Align(
+          alignment: Alignment.center,
           child: Text(
             'GAME OF THRONES',
             style: TextStyle(
@@ -21,14 +20,13 @@ class GOTtext extends StatelessWidget {
               letterSpacing: 1,
               foreground: Paint()
                 ..style = PaintingStyle.stroke
-                ..strokeWidth = 3
-                ..color = Colors.orange,
+                ..strokeWidth = 7
+                ..color = const Color(0xff2c3243),
             ),
           ),
         ),
-        const Positioned(
-          bottom: 150,
-          left: 45,
+        const Align(
+          alignment: Alignment.center,
           child: Text(
             'GAME OF THRONES',
             style: TextStyle(

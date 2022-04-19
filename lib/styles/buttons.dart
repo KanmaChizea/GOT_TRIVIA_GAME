@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 elevatedButtonStyle() {
   return ElevatedButton.styleFrom(
-      maximumSize: const Size(150, 50),
+      fixedSize: const Size(150, 40),
       elevation: 2,
-      primary: Colors.orange.shade600,
-      onPrimary: Colors.white,
+      primary: const Color(0xff2c3243),
+      onPrimary: const Color(0xffd6d0c0),
       textStyle: const TextStyle(fontSize: 18),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)));
 }

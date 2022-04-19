@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:got_trivia_game/globals.dart';
+import 'package:got_trivia_game/screens/home.dart';
+import 'package:got_trivia_game/screens/statistics.dart';
 import 'package:got_trivia_game/services/trivia_controller.dart';
 import 'package:got_trivia_game/styles/buttons.dart';
 import 'package:got_trivia_game/styles/texts.dart';
@@ -42,10 +44,43 @@ class _ResultScreenState extends State<ResultScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
-          minimum: const EdgeInsets.only(top: 70),
+          minimum: const EdgeInsets.only(top: 70, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
+                            (route) => false);
+                      },
+                      icon: const Icon(Icons.home_outlined),
+                      label: const Text('Home'),
+                      style: TextButton.styleFrom(
+                        primary: const Color.fromARGB(255, 185, 194, 218),
+                        textStyle: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      )),
+                  TextButton.icon(
+                    onPressed: () {
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
+                    },
+                    icon: const Icon(Icons.exit_to_app),
+                    label: const Text('Exit'),
+                    style: TextButton.styleFrom(
+                      primary: const Color.fromARGB(255, 185, 194, 218),
+                      textStyle: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              Flexible(child: Container()),
               Text('RESULT', style: headings()),
               const SizedBox(height: 30),
               showResultWidget(context),
@@ -70,13 +105,15 @@ class _ResultScreenState extends State<ResultScreen> {
                 label: const Text('Play again'),
                 style: elevatedButtonStyle(),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 15),
               ElevatedButton.icon(
                 onPressed: () {
-                  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Statistics()),
+                  );
                 },
-                icon: const Icon(Icons.exit_to_app),
-                label: const Text('Exit'),
+                icon: const Icon(Icons.leaderboard_outlined),
+                label: const Text('Statistics'),
                 style: elevatedButtonStyle(),
               ),
               Flexible(child: Container())
@@ -100,7 +137,7 @@ class _ResultScreenState extends State<ResultScreen> {
         ),
         Positioned(
           bottom: 15,
-          left: MediaQuery.of(context).size.width / 2 - 85,
+          left: MediaQuery.of(context).size.width / 2 - 105,
           child: Container(
             width: 170,
             height: 170,

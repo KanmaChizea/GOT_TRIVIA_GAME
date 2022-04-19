@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:got_trivia_game/globals.dart' as globals;
 import 'package:got_trivia_game/services/trivia_processing.dart';
+import 'package:got_trivia_game/styles/texts.dart';
 
 class OptionsBuild extends StatefulWidget {
   final String correctAnswer;
@@ -35,7 +36,7 @@ class _OptionsBuildState extends State<OptionsBuild> {
     'Tyrion Lannister',
     'Cersei Lannister',
     'Aerys II Tagaryen',
-    'JoffreyBaratheon',
+    'Joffrey Lannister',
     'Daenerys Targaryen',
     'Tywin Lannister',
     'Ramsay Bolton',
@@ -94,7 +95,9 @@ class _OptionsBuildState extends State<OptionsBuild> {
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: RadioListTile<String>(
-                title: Text(options[index]),
+                title: Text(
+                  options[index],
+                ),
                 secondary: (options[index] == correctOption)
                     ? Icon(
                         Icons.done,
@@ -115,7 +118,10 @@ class _OptionsBuildState extends State<OptionsBuild> {
                     });
                   }
 
-                  TriviaProcessing().answeredQuestion(questionIndex, context);
+                  Future.delayed(
+                      const Duration(seconds: 1),
+                      () => TriviaProcessing()
+                          .answeredQuestion(questionIndex, context));
                 },
                 activeColor: Colors.white,
                 shape: RoundedRectangleBorder(

@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/globals.dart' as globals;
+import 'package:got_trivia_game/screens/no_network.dart';
 
 import '../screens/trivia.dart';
 import 'trivia_api.dart';
@@ -40,15 +44,19 @@ class _TriviaControllerState extends State<TriviaController> {
         future: getQuestions(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            globals.globalList = list;
+            if (snapshot.hasError) {
+              return const NoNetwork();
+            } else {
+              globals.globalList = list;
 
-            return Questions(
-              questionIndex: questionIndex,
-              questionInfo: list[questionIndex - 1],
-            );
+              return Questions(
+                questionIndex: questionIndex,
+                questionInfo: list[questionIndex - 1],
+              );
+            }
           }
           return const Center(
-            child: CircularProgressIndicator(color: Colors.orange),
+            child: CircularProgressIndicator(color: Color(0xff2c3243)),
           );
         });
   }

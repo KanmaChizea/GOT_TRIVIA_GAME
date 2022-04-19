@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:got_trivia_game/screens/statistics.dart';
 import 'package:got_trivia_game/services/trivia_controller.dart';
 import 'package:got_trivia_game/styles/buttons.dart';
 
@@ -11,40 +12,47 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 40, 15, 30),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Flexible(child: Container()),
-            SizedBox(height: size.height / 2, child: const GOTtext()),
-            const SizedBox(height: 15),
-            const Text('TRIVIA',
-                style: TextStyle(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Flexible(child: Container()),
+          SizedBox(height: size.height / 3, child: const GOTtext()),
+          const SizedBox(height: 15),
+          const Text('TRIVIA',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40,
+                fontFamily: 'FasterOne',
+              )),
+          const SizedBox(height: 10),
+          const Text('Guess who said what',
+              style: TextStyle(
                   color: Colors.white,
-                  fontSize: 40,
-                  fontFamily: 'FasterOne',
-                )),
-            const SizedBox(height: 10),
-            const Text('Guess who said what',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'PlayBall',
-                    letterSpacing: 1.0)),
-            const SizedBox(height: 50),
-            ElevatedButton(
-                style: elevatedButtonStyle(),
-                onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const TriviaController()),
-                    (route) => false),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [Text('START'), Icon(Icons.arrow_forward)],
-                )),
-            Flexible(child: Container())
-          ]),
-        ));
+                  fontSize: 20,
+                  //  fontFamily: 'PlayBall',
+                  letterSpacing: 1.0)),
+          const SizedBox(height: 50),
+          ElevatedButton(
+              style: elevatedButtonStyle(),
+              onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const TriviaController()),
+                  (route) => false),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [Text('START'), Icon(Icons.arrow_forward)],
+              )),
+          const SizedBox(height: 15),
+          ElevatedButton(
+            style: elevatedButtonStyle(),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const Statistics()),
+            ),
+            child: const Text('STATISTICS'),
+          ),
+          Flexible(child: Container())
+        ]),
+      ),
+    );
   }
 }

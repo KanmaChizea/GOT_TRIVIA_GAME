@@ -13,3 +13,7 @@ TextStyle result() {
   return const TextStyle(
       fontSize: 50, color: Colors.white, fontWeight: FontWeight.bold);
 }
+
+TextStyle statisticsHeaders() {
+  return const TextStyle(color: Color(0xffFFFDD0), fontSize: 20);
+}
