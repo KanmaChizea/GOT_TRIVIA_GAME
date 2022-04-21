@@ -32,23 +32,43 @@ class Home extends StatelessWidget {
                   //  fontFamily: 'PlayBall',
                   letterSpacing: 1.0)),
           const SizedBox(height: 50),
-          ElevatedButton(
-              style: elevatedButtonStyle(),
-              onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (context) => const TriviaController()),
-                  (route) => false),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [Text('START'), Icon(Icons.arrow_forward)],
-              )),
-          const SizedBox(height: 15),
-          ElevatedButton(
-            style: elevatedButtonStyle(),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const Statistics()),
+          SizedBox(
+            width: 190,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    style: elevatedButtonStyle(),
+                    onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const TriviaController()),
+                        (route) => false),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('START'),
+                        SizedBox(width: 8),
+                        Icon(Icons.arrow_forward)
+                      ],
+                    )),
+                const SizedBox(height: 15),
+                ElevatedButton(
+                    style: elevatedButtonStyle(),
+                    onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => const Statistics()),
+                        ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('STATISTICS'),
+                        SizedBox(width: 8),
+                        Icon(Icons.bar_chart_outlined)
+                      ],
+                    )),
+              ],
             ),
-            child: const Text('STATISTICS'),
           ),
           Flexible(child: Container())
         ]),

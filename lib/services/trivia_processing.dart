@@ -8,13 +8,6 @@ class TriviaProcessing {
     if (index < 10) {
       Navigator.of(context)
           .pushAndRemoveUntil(pageRouteBuilder(index), ((route) => false));
-      // Navigator.of(context).pushAndRemoveUntil(
-      //     MaterialPageRoute(
-      //         builder: (context) => Questions(
-      //               questionIndex: index + 1,
-      //               questionInfo: globals.globalList[index],
-      //             )),
-      //     (route) => false);
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const ResultScreen()),
@@ -28,7 +21,7 @@ class TriviaProcessing {
         questionIndex: index + 1,
         questionInfo: globals.globalList[index],
       ),
-      transitionDuration: const Duration(seconds: 1),
+      transitionDuration: const Duration(milliseconds: 300),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var tween =
             Tween(begin: const Offset(0.0, 1.0), end: Offset.zero).chain(

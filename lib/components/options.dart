@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:got_trivia_game/globals.dart' as globals;
 import 'package:got_trivia_game/services/trivia_processing.dart';
-import 'package:got_trivia_game/styles/texts.dart';
 
 class OptionsBuild extends StatefulWidget {
   final String correctAnswer;

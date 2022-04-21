@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:got_trivia_game/components/countdown.dart';
 import 'package:got_trivia_game/components/questions.dart';
-import 'package:got_trivia_game/styles/texts.dart';
+import 'package:got_trivia_game/services/trivia_processing.dart';
 
 import '../components/options.dart';
 
@@ -34,23 +35,21 @@ class _QuestionsState extends State<Questions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text('GOT Trivia'),
-          centerTitle: true,
-          titleTextStyle: headings(),
-        ),
         backgroundColor: Colors.black,
         body: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 50),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            CountdownTimer(
+              index: index,
+            ),
+            const SizedBox(height: 15),
             QuestionsBuild(index: index, data: data),
             Expanded(
               child: OptionsBuild(
                 correctAnswer: data['answer'],
-                questionIndex: widget.questionIndex,
+                questionIndex: index,
               ),
             ),
             const SizedBox(height: 30),

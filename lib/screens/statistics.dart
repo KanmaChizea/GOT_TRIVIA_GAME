@@ -14,7 +14,7 @@ class _StatisticsState extends State<Statistics> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Statistics'),
+        title: const Text('Your High Scores'),
         titleTextStyle: headings().copyWith(color: Colors.white),
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -22,42 +22,32 @@ class _StatisticsState extends State<Statistics> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildStatisticsHeader('Your Highscore'),
-            Container(
-                margin: const EdgeInsets.all(15),
-                height: 120,
-                decoration: const ShapeDecoration(
-                    shape: CircleBorder(
-                        side: BorderSide(
-                  color: Colors.white,
-                  width: 1.5,
-                ))),
-                child: Center(
-                    child: Text('10', style: body().copyWith(fontSize: 50)))),
-            buildStatisticsHeader('History')
-          ],
-        ),
+        child: ListView(children: [
+          buildStatHeader('Total games played'),
+          buildStatHeader('Average scores'),
+          buildStatHeader('Your high scores'),
+          ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => Column(children: []),
+          ),
+        ]),
       ),
     );
   }
 
-  buildStatisticsHeader(String s) {
+  Column buildStatHeader(String s) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           s,
-          style: statisticsHeaders(),
+          style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              color: Colors.blueGrey),
         ),
         Divider(
-          endIndent: MediaQuery.of(context).size.width / 2,
-          height: 15,
-          thickness: 1.2,
-          color: Colors.grey,
-        )
+          endIndent: MediaQuery.of(context).size.width / 2.5,
+        ),
       ],
     );
   }

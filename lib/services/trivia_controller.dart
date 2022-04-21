@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/globals.dart' as globals;
 import 'package:got_trivia_game/screens/no_network.dart';

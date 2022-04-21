@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 elevatedButtonStyle() {
   return ElevatedButton.styleFrom(
-      fixedSize: const Size(150, 40),
+      minimumSize: const Size(150, 40),
       elevation: 2,
       primary: const Color(0xff2c3243),
       onPrimary: const Color(0xffd6d0c0),

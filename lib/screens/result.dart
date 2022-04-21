@@ -6,7 +6,6 @@ import 'package:got_trivia_game/screens/statistics.dart';
 import 'package:got_trivia_game/services/trivia_controller.dart';
 import 'package:got_trivia_game/styles/buttons.dart';
 import 'package:got_trivia_game/styles/texts.dart';
-import 'package:got_trivia_game/globals.dart' as globals;
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -95,6 +94,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   setState(() {
                     globalList = [];
                     totalScore = 0;
+                    unanswered = 0;
                   });
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
@@ -112,7 +112,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     MaterialPageRoute(builder: (context) => const Statistics()),
                   );
                 },
-                icon: const Icon(Icons.leaderboard_outlined),
+                icon: const Icon(Icons.bar_chart_outlined),
                 label: const Text('Statistics'),
                 style: elevatedButtonStyle(),
               ),
@@ -123,34 +123,21 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Stack showResultWidget(BuildContext context) {
-    return Stack(
-      children: [
-        Center(
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: globals.totalScore < 5 ? Colors.red : Colors.green,
-            ),
-          ),
+    return Stack(alignment: Alignment.center, children: [
+      SizedBox(
+        height: 200,
+        width: 200,
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.grey.shade300,
+          color: totalScore >= 5 ? Colors.green : Colors.red,
+          strokeWidth: 15,
+          value: totalScore / 10,
         ),
-        Positioned(
-          bottom: 15,
-          left: MediaQuery.of(context).size.width / 2 - 105,
-          child: Container(
-            width: 170,
-            height: 170,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: Colors.black),
-            child: Center(
-                child: Text(
-              '$totalScore/10',
-              style: result(),
-            )),
-          ),
-        )
-      ],
-    );
+      ),
+      Text(
+        '$totalScore/10',
+        style: result(),
+      )
+    ]);
   }
 }
