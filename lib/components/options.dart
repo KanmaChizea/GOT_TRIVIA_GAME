@@ -120,7 +120,7 @@ class _OptionsBuildState extends State<OptionsBuild> {
                   Future.delayed(
                       const Duration(seconds: 1),
                       () => TriviaProcessing()
-                          .answeredQuestion(questionIndex, context));
+                          .answeredQuestion(questionIndex, context, true));
                 },
                 activeColor: Colors.white,
                 shape: RoundedRectangleBorder(

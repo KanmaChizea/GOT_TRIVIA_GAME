@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/components/countdown.dart';
 import 'package:got_trivia_game/components/questions.dart';
-import 'package:got_trivia_game/services/trivia_processing.dart';
+import 'package:got_trivia_game/globals.dart';
 
 import '../components/options.dart';
 
@@ -34,6 +34,7 @@ class _QuestionsState extends State<Questions> {
 
   @override
   Widget build(BuildContext context) {
+    print(unanswered);
     return Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(

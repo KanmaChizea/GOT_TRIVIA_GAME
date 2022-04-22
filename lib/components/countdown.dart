@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:got_trivia_game/globals.dart';
 import 'package:got_trivia_game/services/trivia_processing.dart';
 
@@ -25,9 +24,8 @@ class _CountdownTimerState extends State<CountdownTimer>
 
   void _timeup() {
     if (countText == '00:00') {
-      unanswered++;
-      Future.delayed(Duration.zero,
-          TriviaProcessing().answeredQuestion(widget.index, context));
+      controller.stop();
+      TriviaProcessing().answeredQuestion(widget.index, context, false);
     }
   }
 

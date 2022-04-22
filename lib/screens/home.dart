@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
                     style: elevatedButtonStyle(),
                     onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => const Statistics()),
+                              builder: (context) => const StatisticsScreen()),
                         ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -17,3 +17,13 @@ TextStyle result() {
 TextStyle statisticsHeaders() {
   return const TextStyle(color: Color(0xffFFFDD0), fontSize: 20);
 }
+
+TextStyle tableHeader() {
+  return const TextStyle(
+      fontWeight: FontWeight.w700, color: Color(0xffFFFDD0), fontSize: 17);
+}
+
+TextStyle tableBody() {
+  return const TextStyle(
+      fontWeight: FontWeight.w500, color: Color(0xffFFFDD0), fontSize: 15);
+}

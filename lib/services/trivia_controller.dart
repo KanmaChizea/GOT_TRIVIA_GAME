@@ -19,6 +19,9 @@ class _TriviaControllerState extends State<TriviaController> {
 
   @override
   void initState() {
+    globals.totalScore = 0;
+    globals.globalList = [];
+    globals.unanswered = 0;
     _triviaApi = TriviaApi();
     super.initState();
   }
@@ -52,8 +55,20 @@ class _TriviaControllerState extends State<TriviaController> {
               );
             }
           }
-          return const Center(
-            child: CircularProgressIndicator(color: Color(0xff2c3243)),
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(color: Colors.white),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('...fetching questions')
+                ],
+              ),
+            ),
           );
         });
   }

@@ -4,7 +4,10 @@ import 'package:got_trivia_game/screens/trivia.dart';
 import 'package:got_trivia_game/screens/result.dart';
 
 class TriviaProcessing {
-  answeredQuestion(int index, BuildContext context) {
+  answeredQuestion(int index, BuildContext context, bool isAnswered) {
+    if (!isAnswered) {
+      globals.unanswered++;
+    }
     if (index < 10) {
       Navigator.of(context)
           .pushAndRemoveUntil(pageRouteBuilder(index), ((route) => false));
