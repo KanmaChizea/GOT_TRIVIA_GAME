@@ -12,7 +12,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Flexible(child: Container()),
@@ -29,44 +28,43 @@ class Home extends StatelessWidget {
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
-                  //  fontFamily: 'PlayBall',
+                  fontFamily: 'PlayBall',
                   letterSpacing: 1.0)),
           const SizedBox(height: 50),
-          SizedBox(
-            width: 190,
-            height: 200,
-            child: Column(
+          // SizedBox(
+          //   width: 170,
+          //   height: 130,
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          ElevatedButton(
+              style: elevatedButtonStyle(),
+              onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const TriviaController()),
+                  (route) => false),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text('Start'),
+                  SizedBox(width: 8),
+                  Icon(Icons.arrow_forward)
+                ],
+              )),
+          const SizedBox(height: 15),
+          ElevatedButton(
+            style: elevatedButtonStyle(),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const StatisticsScreen()),
+            ),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    style: elevatedButtonStyle(),
-                    onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const TriviaController()),
-                        (route) => false),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('START'),
-                        SizedBox(width: 8),
-                        Icon(Icons.arrow_forward)
-                      ],
-                    )),
-                const SizedBox(height: 15),
-                ElevatedButton(
-                    style: elevatedButtonStyle(),
-                    onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const StatisticsScreen()),
-                        ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('STATISTICS'),
-                        SizedBox(width: 8),
-                        Icon(Icons.bar_chart_outlined)
-                      ],
-                    )),
+              children: const [
+                Text('Statistics'),
+                SizedBox(width: 8),
+                Icon(Icons.bar_chart_outlined)
+                //   ],
+                // )),
               ],
             ),
           ),

@@ -10,7 +10,6 @@ class NoNetwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +20,7 @@ class NoNetwork extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "You don't have internet connection",
+              "Connection failed",
               style: body(),
             ),
             const SizedBox(height: 40),

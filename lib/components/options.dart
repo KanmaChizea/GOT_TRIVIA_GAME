@@ -26,6 +26,7 @@ class _OptionsBuildState extends State<OptionsBuild> {
   late String correctOption;
   late int questionIndex;
   late List options;
+  int? selected;
 
   List characters = [
     'Jon Snow',
@@ -102,11 +103,17 @@ class _OptionsBuildState extends State<OptionsBuild> {
                         Icons.done,
                         color: correct,
                       )
-                    : Icon(Icons.close, color: wrong),
+                    : (selected == index)
+                        ? Icon(Icons.close, color: wrong)
+                        : null,
                 value: options[index],
+                selectedTileColor: (options[index] == correctOption)
+                    ? Colors.green
+                    : Colors.red,
                 groupValue: _selectedValue,
                 onChanged: (String? value) {
                   setState(() {
+                    selected = index;
                     _selectedValue = value;
                     correct = Colors.green;
                     wrong = Colors.red;

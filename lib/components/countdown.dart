@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/globals.dart';
 import 'package:got_trivia_game/services/trivia_processing.dart';
 
 class CountdownTimer extends StatefulWidget {

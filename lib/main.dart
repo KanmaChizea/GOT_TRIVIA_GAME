@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       create: (context) => MyDatabase(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.dark),
+        theme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: Colors.black87),
         home: const Home(),
       ),
     );

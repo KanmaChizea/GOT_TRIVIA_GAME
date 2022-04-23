@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/globals.dart';
-import 'package:got_trivia_game/screens/home.dart';
 import 'package:got_trivia_game/services/database/database.dart';
 import 'package:got_trivia_game/styles/texts.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +13,6 @@ class StatisticsScreen extends StatefulWidget {
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
   late MyDatabase database;
-  // late List<Statistic> scores;
 
   Future _getScores() async {
     return await database.getScores();
@@ -25,24 +22,12 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   Widget build(BuildContext context) {
     database = Provider.of<MyDatabase>(context);
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-          title: const Text('Your High Scores'),
-          titleTextStyle: headings().copyWith(color: Colors.white),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          leading: IconButton(
-              icon: const Icon(Icons.home_outlined),
-              onPressed: () {
-                setState(() {
-                  globalList = [];
-                  totalScore = 0;
-                  unanswered = 0;
-                });
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const Home()),
-                    (route) => false);
-              })),
+        title: const Text('Your High Scores'),
+        titleTextStyle: headings().copyWith(color: Colors.white),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
       body: FutureBuilder(
           future: _getScores(),
           builder: (context, snapshot) {
@@ -127,7 +112,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         Container(
           padding: const EdgeInsets.only(left: 50),
           child: Text(
-            t.toString(),
+            t!.toStringAsFixed(2),
             style: body().copyWith(fontSize: 25),
           ),
         ),

@@ -20,8 +20,8 @@ class GOTtext extends StatelessWidget {
               letterSpacing: 1,
               foreground: Paint()
                 ..style = PaintingStyle.stroke
-                ..strokeWidth = 7
-                ..color = const Color(0xff2c3243),
+                ..strokeWidth = 4
+                ..color = Colors.orange,
             ),
           ),
         ),

@@ -46,9 +46,9 @@ class _ResultScreenState extends State<ResultScreen> {
     database = Provider.of<MyDatabase>(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         leadingWidth: 100,
         leading: TextButton.icon(
             onPressed: () {
@@ -108,7 +108,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 await database.addScore(
                     score: totalScore, unanswered: unanswered);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.grey.shade600,
+                  backgroundColor: Colors.grey.shade800,
                   content: const Text(
                     'Saved!',
                     style: TextStyle(color: Colors.white),
@@ -140,10 +140,10 @@ class _ResultScreenState extends State<ResultScreen> {
             const SizedBox(height: 15),
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const StatisticsScreen()),
-                    (route) => false);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const StatisticsScreen()),
+                );
               },
               icon: const Icon(Icons.bar_chart_outlined),
               label: const Text('Statistics'),

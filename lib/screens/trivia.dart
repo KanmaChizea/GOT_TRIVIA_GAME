@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/components/countdown.dart';
 import 'package:got_trivia_game/components/questions.dart';
-import 'package:got_trivia_game/globals.dart';
 
 import '../components/options.dart';
 
@@ -34,27 +33,22 @@ class _QuestionsState extends State<Questions> {
 
   @override
   Widget build(BuildContext context) {
-    print(unanswered);
     return Scaffold(
-        backgroundColor: Colors.black,
         body: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 50),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            CountdownTimer(
-              index: index,
-            ),
-            const SizedBox(height: 15),
-            QuestionsBuild(index: index, data: data),
-            Expanded(
-              child: OptionsBuild(
-                correctAnswer: data['answer'],
-                questionIndex: index,
-              ),
-            ),
-            const SizedBox(height: 30),
-          ]),
-        )));
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
+      child: ListView(shrinkWrap: true, children: [
+        const SizedBox(height: 30),
+        CountdownTimer(
+          index: index,
+        ),
+        const SizedBox(height: 25),
+        QuestionsBuild(index: index, data: data),
+        OptionsBuild(
+          correctAnswer: data['answer'],
+          questionIndex: index,
+        ),
+      ]),
+    )));
   }
 }

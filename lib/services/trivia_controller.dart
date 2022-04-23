@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/globals.dart' as globals;
+import 'package:got_trivia_game/screens/loading.dart';
 import 'package:got_trivia_game/screens/no_network.dart';
 
 import '../screens/trivia.dart';
@@ -55,21 +56,7 @@ class _TriviaControllerState extends State<TriviaController> {
               );
             }
           }
-          return Scaffold(
-            backgroundColor: Colors.black,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircularProgressIndicator(color: Colors.white),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('...fetching questions')
-                ],
-              ),
-            ),
-          );
+          return const LoadingScreen();
         });
   }
 }
