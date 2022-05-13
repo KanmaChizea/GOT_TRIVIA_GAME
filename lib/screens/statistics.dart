@@ -67,10 +67,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         data.map((m) => m.score).reduce((a, b) => a + b) / data.length;
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: ListView(shrinkWrap: true, children: [
+      child: Column(children: [
         buildStatHeader('Total games played', data.length),
         buildStatHeader('Average score', average),
-        buildHighScore(data),
+        Expanded(child: buildHighScore(data)),
         const SizedBox(
           height: 20,
         ),
@@ -88,7 +88,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           ),
           label: const Text('Clear All'),
           style: TextButton.styleFrom(
-              primary: Colors.blueGrey,
+              primary: Colors.orange.shade300,
               textStyle: const TextStyle(fontSize: 20)),
         )
       ]),
@@ -101,10 +101,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       children: [
         Text(
           s,
-          style: const TextStyle(
+          style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 17,
-              color: Colors.blueGrey),
+              color: Colors.orange.shade300),
         ),
         const SizedBox(
           height: 12,
@@ -127,12 +127,12 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Your high scores',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 17,
-              color: Colors.blueGrey),
+              color: Colors.orange.shade300),
         ),
         const SizedBox(
           height: 12,
@@ -160,38 +160,40 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                 )
               ],
             )),
-        ListView.builder(
-            shrinkWrap: true,
-            itemCount: (data.length < 10) ? data.length : 10,
-            itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${(index + 1).toString()}.',
-                            style: tableHeader().copyWith(fontSize: 15),
-                          ),
-                          Text(
-                            data[index].score.toString(),
-                            style: tableBody(),
-                          ),
-                          Text(
-                            data[index].unanswered.toString(),
-                            style: tableBody(),
-                          ),
-                          Text(
-                            (DateFormat('dd-MM-yy').format(data[index].date)),
-                            style: tableBody(),
-                          )
-                        ],
-                      ),
-                      const Divider()
-                    ],
-                  ),
-                )),
+        Expanded(
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: (data.length < 10) ? data.length : 10,
+              itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${(index + 1).toString()}.',
+                              style: tableHeader().copyWith(fontSize: 15),
+                            ),
+                            Text(
+                              data[index].score.toString(),
+                              style: tableBody(),
+                            ),
+                            Text(
+                              data[index].unanswered.toString(),
+                              style: tableBody(),
+                            ),
+                            Text(
+                              (DateFormat('dd-MM-yy').format(data[index].date)),
+                              style: tableBody(),
+                            )
+                          ],
+                        ),
+                        const Divider()
+                      ],
+                    ),
+                  )),
+        ),
       ],
     );
   }

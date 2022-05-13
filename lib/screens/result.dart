@@ -24,7 +24,12 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   void initState() {
     resultMessage = message();
+
     super.initState();
+  }
+
+  void saveScore() async {
+    await database.addScore(score: totalScore, unanswered: unanswered);
   }
 
   String message() {
@@ -44,7 +49,7 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     database = Provider.of<MyDatabase>(context);
-
+    saveScore();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -103,31 +108,8 @@ class _ResultScreenState extends State<ResultScreen> {
               style: body(),
             ),
             Flexible(child: Container()),
-            ElevatedButton.icon(
-              onPressed: () async {
-                await database.addScore(
-                    score: totalScore, unanswered: unanswered);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.grey.shade800,
-                  content: const Text(
-                    'Saved!',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  duration: const Duration(seconds: 1),
-                ));
-              },
-              icon: const Icon(Icons.save_alt_outlined),
-              label: const Text('Save score'),
-              style: elevatedButtonStyle(),
-            ),
-            const SizedBox(height: 15),
-            ElevatedButton.icon(
+            TextButton.icon(
               onPressed: () {
-                setState(() {
-                  globalList = [];
-                  totalScore = 0;
-                  unanswered = 0;
-                });
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (context) => const TriviaController()),
@@ -135,10 +117,15 @@ class _ResultScreenState extends State<ResultScreen> {
               },
               icon: const Icon(Icons.replay),
               label: const Text('Play again'),
-              style: elevatedButtonStyle(),
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                primary: Colors.orange,
+                textStyle:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
-            const SizedBox(height: 15),
-            ElevatedButton.icon(
+            const SizedBox(height: 10),
+            TextButton.icon(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -147,7 +134,11 @@ class _ResultScreenState extends State<ResultScreen> {
               },
               icon: const Icon(Icons.bar_chart_outlined),
               label: const Text('Statistics'),
-              style: elevatedButtonStyle(),
+              style: TextButton.styleFrom(
+                primary: Colors.orange,
+                textStyle:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
             Flexible(child: Container())
           ],
@@ -159,12 +150,14 @@ class _ResultScreenState extends State<ResultScreen> {
   Stack showResultWidget(BuildContext context) {
     return Stack(alignment: Alignment.center, children: [
       SizedBox(
-        height: 200,
-        width: 200,
+        height: 150,
+        width: 150,
         child: CircularProgressIndicator(
           backgroundColor: Colors.grey.shade300,
-          color: totalScore >= 5 ? Colors.green : Colors.red,
-          strokeWidth: 15,
+          color: totalScore >= 5
+              ? const Color(0xff7cfc00)
+              : const Color.fromARGB(255, 255, 9, 0),
+          strokeWidth: 10,
           value: totalScore / 10,
         ),
       ),

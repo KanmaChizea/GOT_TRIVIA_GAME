@@ -24,7 +24,7 @@ class QuestionsBuild extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         Text(
-          '"${data['question']}',
+          '${data['question']}',
           style: body(),
         ),
       ],

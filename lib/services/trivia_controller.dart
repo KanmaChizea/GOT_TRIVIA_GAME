@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/globals.dart' as globals;
+import 'package:got_trivia_game/globals.dart';
 import 'package:got_trivia_game/screens/loading.dart';
 import 'package:got_trivia_game/screens/no_network.dart';
 
@@ -24,15 +25,18 @@ class _TriviaControllerState extends State<TriviaController> {
     globals.globalList = [];
     globals.unanswered = 0;
     _triviaApi = TriviaApi();
+
     super.initState();
   }
 
   getQuestions() async {
-    final data = await _triviaApi.fetchData() as List;
+    final jsondata = await _triviaApi.fetchData();
+    final data = jsondata["data"] as List;
+    data.shuffle();
     for (int i = 0; i < 10; i++) {
       final item = {
-        'question': data[i]['sentence'],
-        'answer': data[i]['character']['name'],
+        'question': data[i]['quote'],
+        'answer': data[i]['character'],
       };
 
       list.add(item);

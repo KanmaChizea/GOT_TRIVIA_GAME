@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
 import 'package:got_trivia_game/globals.dart' as globals;
 import 'package:got_trivia_game/services/trivia_processing.dart';
 
@@ -28,51 +27,28 @@ class _OptionsBuildState extends State<OptionsBuild> {
   late List options;
   int? selected;
 
-  List characters = [
-    'Jon Snow',
-    'Sansa Stark',
-    'Eddard "Ned" Stark',
-    'Jaime Lannister',
-    'Tyrion Lannister',
-    'Cersei Lannister',
-    'Aerys II Tagaryen',
-    'Joffrey Lannister',
-    'Daenerys Targaryen',
-    'Tywin Lannister',
-    'Ramsay Bolton',
-    'Arya Stark',
-    'Robert Baratheon',
-    'Theon Greyjoy',
-    'Samwell Tarly',
-    'Lord Varys',
-    'Bran Stark',
-    'Brienne of Tarth',
-    'Petyr Baelish',
-    'Tormund',
-    'Melisandre',
-    'Olenna Tyrell',
-    'Mance Rayder'
-  ];
-
   List getOptions() {
     final _random = Random();
     late String replacement;
 
     //select 3 random characters from list
-    final options = (characters..shuffle()).take(3).toList();
+    final options = (globals.globalCharacterList..shuffle()).take(3).toList();
 
     //ensure the correct answer in sublist and no item is duplicated
     for (var element in options) {
       if (element == correctOption) {
         options.remove(element);
         do {
-          replacement = characters[_random.nextInt(characters.length)];
+          replacement = globals.globalCharacterList[
+              _random.nextInt(globals.globalCharacterList.length)];
         } while (options.contains(replacement));
         options.add(replacement);
       }
     }
     //add the correct answer to options list
+
     options.add(correctOption);
+
     //shuffle final options
     options.shuffle();
     return options;
@@ -108,15 +84,15 @@ class _OptionsBuildState extends State<OptionsBuild> {
                         : null,
                 value: options[index],
                 selectedTileColor: (options[index] == correctOption)
-                    ? Colors.green
-                    : Colors.red,
+                    ? const Color(0xff7cfc00)
+                    : const Color.fromARGB(255, 255, 9, 0),
                 groupValue: _selectedValue,
                 onChanged: (String? value) {
                   setState(() {
                     selected = index;
                     _selectedValue = value;
-                    correct = Colors.green;
-                    wrong = Colors.red;
+                    correct = const Color(0xff7cfc00);
+                    wrong = const Color.fromARGB(255, 255, 9, 0);
                   });
                   if (options[index] == correctOption) {
                     setState(() {

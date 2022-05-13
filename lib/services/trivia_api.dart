@@ -3,8 +3,8 @@ import 'dart:convert';
 
 class TriviaApi {
   Future fetchData() async {
-    Uri url =
-        Uri.parse('https://game-of-thrones-quotes.herokuapp.com/v1/random/10');
+    Uri url = Uri.parse(
+        'https://gameofthrones-quotes-api.herokuapp.com/api/v1/quotes');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return json.decode(response.body);
