@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:got_trivia_game/styles/colors.dart';
 
-TextStyle headings() {
-  return const TextStyle(
-      fontSize: 25, color: Colors.white70, fontWeight: FontWeight.bold);
-}
+const TextStyle headings =
+    TextStyle(fontSize: 25, color: grey, fontWeight: FontWeight.bold);
+const TextStyle body = TextStyle(fontSize: 20, color: white);
+const TextStyle result =
+    TextStyle(fontSize: 50, color: white, fontWeight: FontWeight.bold);
+const TextStyle statisticsHeaders = TextStyle(color: white, fontSize: 20);
 
-TextStyle body() {
-  return const TextStyle(fontSize: 20, color: Colors.white);
-}
+const TextStyle tableHeader =
+    TextStyle(fontWeight: FontWeight.w700, color: white, fontSize: 17);
 
-TextStyle result() {
-  return const TextStyle(
-      fontSize: 50, color: Colors.white, fontWeight: FontWeight.bold);
-}
-
-TextStyle statisticsHeaders() {
-  return const TextStyle(color: Colors.white, fontSize: 20);
-}
-
-TextStyle tableHeader() {
-  return const TextStyle(
-      fontWeight: FontWeight.w700, color: Colors.white, fontSize: 17);
-}
-
-TextStyle tableBody() {
-  return const TextStyle(
-      fontWeight: FontWeight.w500, color: Colors.white, fontSize: 15);
-}
+const TextStyle tableBody =
+    TextStyle(fontWeight: FontWeight.w500, color: white, fontSize: 15);

@@ -31,8 +31,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     loadingMessage = '...fetching questions';
-    a = Timer(const Duration(seconds: 7), messageChange1);
-    b = Timer(const Duration(seconds: 15), messageChange2);
+    a = Timer(const Duration(seconds: 10), messageChange1);
+    b = Timer(const Duration(seconds: 20), messageChange2);
     a;
     b;
 

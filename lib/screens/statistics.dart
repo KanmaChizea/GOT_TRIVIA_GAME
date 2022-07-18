@@ -24,7 +24,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your High Scores'),
-        titleTextStyle: headings().copyWith(color: Colors.white),
+        titleTextStyle: headings.copyWith(color: Colors.white),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -45,7 +45,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                   return Center(
                     child: Text(
                       'Sorry, an error occured!',
-                      style: body(),
+                      style: body,
                     ),
                   );
                 }
@@ -113,7 +113,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           padding: const EdgeInsets.only(left: 50),
           child: Text(
             t!.toStringAsFixed(2),
-            style: body().copyWith(fontSize: 25),
+            style: body.copyWith(fontSize: 25),
           ),
         ),
         Divider(
@@ -144,19 +144,19 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
               children: [
                 Text(
                   'S/N',
-                  style: tableHeader(),
+                  style: tableHeader,
                 ),
                 Text(
                   'Score',
-                  style: tableHeader(),
+                  style: tableHeader,
                 ),
                 Text(
                   'Unanswered',
-                  style: tableHeader(),
+                  style: tableHeader,
                 ),
                 Text(
                   'Date',
-                  style: tableHeader(),
+                  style: tableHeader,
                 )
               ],
             )),
@@ -173,19 +173,19 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           children: [
                             Text(
                               '${(index + 1).toString()}.',
-                              style: tableHeader().copyWith(fontSize: 15),
+                              style: tableHeader.copyWith(fontSize: 15),
                             ),
                             Text(
                               data[index].score.toString(),
-                              style: tableBody(),
+                              style: tableBody,
                             ),
                             Text(
                               data[index].unanswered.toString(),
-                              style: tableBody(),
+                              style: tableBody,
                             ),
                             Text(
                               (DateFormat('dd-MM-yy').format(data[index].date)),
-                              style: tableBody(),
+                              style: tableBody,
                             )
                           ],
                         ),

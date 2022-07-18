@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:got_trivia_game/styles/colors.dart';
 
 class GOTtext extends StatelessWidget {
   const GOTtext({
@@ -21,7 +22,7 @@ class GOTtext extends StatelessWidget {
               foreground: Paint()
                 ..style = PaintingStyle.stroke
                 ..strokeWidth = 4
-                ..color = Colors.orange,
+                ..color = primary,
             ),
           ),
         ),
@@ -32,7 +33,7 @@ class GOTtext extends StatelessWidget {
             style: TextStyle(
                 fontSize: 33,
                 letterSpacing: 1,
-                color: Colors.white,
+                color: white,
                 fontFamily: 'AbhayaLibre'),
           ),
         )

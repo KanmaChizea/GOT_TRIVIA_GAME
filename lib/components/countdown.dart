@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/services/trivia_processing.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../logic/cubit/number_handler.dart';
 
 class CountdownTimer extends StatefulWidget {
-  final int index;
+  final AnimationController controller;
   const CountdownTimer({
     Key? key,
-    required this.index,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -13,30 +15,31 @@ class CountdownTimer extends StatefulWidget {
 }
 
 class _CountdownTimerState extends State<CountdownTimer>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController transitionController;
 
   String get countText {
     Duration count = controller.duration! * controller.value;
-    return '00:${(count.inSeconds % 60).toString().padLeft(2, '0')}';
-  }
-
-  void _timeup() {
-    if (countText == '00:00') {
-      controller.stop();
-      TriviaProcessing().answeredQuestion(widget.index, context, false);
-    }
+    return '00:${(10 - count.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
   void initState() {
     super.initState();
+    transitionController = widget.controller;
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 10));
-    controller.reverse(from: controller.value == 0 ? 1.0 : controller.value);
-    controller.addListener(() {
-      _timeup();
-    });
+    animation = Tween<double>(begin: 10, end: 0).animate(controller)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          context.read<NumberHandlerCubit>().nextQuestion();
+          transitionController.reset();
+          transitionController.forward();
+        }
+      });
+    controller.forward();
   }
 
   @override
@@ -53,13 +56,13 @@ class _CountdownTimerState extends State<CountdownTimer>
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  width: 50,
-                  height: 50,
+                  width: 60,
+                  height: 60,
                   child: CircularProgressIndicator(
                       backgroundColor: Colors.grey.shade300,
                       color: Colors.red,
                       strokeWidth: 4,
-                      value: controller.value),
+                      value: animation.value / 10),
                 ),
                 Text(countText,
                     style: const TextStyle(color: Colors.white, fontSize: 15)),

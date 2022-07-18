@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:got_trivia_game/globals.dart' as globals;
-import 'package:got_trivia_game/screens/trivia.dart';
+
 import 'package:got_trivia_game/screens/result.dart';
 
 class TriviaProcessing {
@@ -20,10 +20,13 @@ class TriviaProcessing {
 
   PageRouteBuilder<dynamic> pageRouteBuilder(int index) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Questions(
-        questionIndex: index + 1,
-        questionInfo: globals.globalList[index],
-      ),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Container();
+      },
+      // Q(
+      //   questionIndex: index + 1,
+      //   questionInfo: globals.globalList[index],
+      // )
       transitionDuration: const Duration(milliseconds: 300),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var tween =
