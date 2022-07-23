@@ -14,7 +14,6 @@ import 'presentation/screens/questions_screen.dart';
 import 'presentation/screens/result.dart';
 import 'presentation/screens/stats_screen.dart';
 import 'presentation/styles/colors.dart';
-import 'data/database/sound_setting_db.dart';
 
 //late MyDatabase database;
 final AudioController musicController = AudioController(filename: 'music.mp3');
@@ -22,7 +21,6 @@ final AudioController clickController = AudioController(filename: 'click.wav');
 
 void main() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(AudioAdapter());
   Hive.registerAdapter(StatsDataAdapter());
   await Hive.openBox('audio');
   await Hive.openBox<StatsData>('stats');

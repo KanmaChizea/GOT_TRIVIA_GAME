@@ -11,6 +11,7 @@ import 'package:got_trivia_game/main.dart';
 import '../../logic/bloc/questions_bloc.dart';
 import '../../logic/cubit/stats_cubit.dart';
 import '../../utils/clicksound.dart';
+import '../components/result_widget.dart';
 import '../styles/colors.dart';
 import '../styles/texts.dart';
 
@@ -115,29 +116,5 @@ class ResultScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ResultWidget extends StatelessWidget {
-  const ResultWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.center, children: [
-      SizedBox(
-        height: 150,
-        width: 150,
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.grey.shade300,
-          color: totalScore >= 5 ? green : red,
-          strokeWidth: 10,
-          value: context.read<ResultHandlerCubit>().state.correct / 10,
-        ),
-      ),
-      Text(
-        '${context.read<ResultHandlerCubit>().state.correct}/10',
-        style: result,
-      )
-    ]);
   }
 }

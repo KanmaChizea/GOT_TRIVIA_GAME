@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:got_trivia_game/logic/cubit/stats_cubit.dart';
 import 'package:intl/intl.dart';
 
+import '../components/highscore.dart';
+import '../components/stats_header.dart';
 import '../styles/colors.dart';
 import '../styles/texts.dart';
 
@@ -34,8 +36,9 @@ class _StatsScreenState extends State<StatsScreen> {
           return Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(children: [
-              buildStatHeader('Total games played', stats.length),
-              buildStatHeader('Average score', average),
+              BuildStatHeader(
+                  headerText: 'Total games played', value: stats.length),
+              BuildStatHeader(headerText: 'Average score', value: average),
               const SizedBox(
                 height: 20,
               ),
@@ -70,128 +73,22 @@ class _StatsScreenState extends State<StatsScreen> {
     );
   }
 
-  Column buildStatHeader(String s, num? t) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          s,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              color: Colors.orange.shade300),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text(
-            t!.toStringAsFixed(2),
-            style: body.copyWith(fontSize: 25),
-          ),
-        ),
-        Divider(
-          endIndent: MediaQuery.of(context).size.width / 2.5,
-        ),
-      ],
-    );
-  }
-}
-
-Future<bool> confirmDelete(BuildContext context) async {
-  return await showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => AlertDialog(
-                content: const Text(
-                    'Are you sure you want to clear your statistics?'),
-                actions: [
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: const Text('Cancel')),
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text('Delete'))
-                ],
-              )) ??
-      false;
-}
-
-class HighScore extends StatelessWidget {
-  const HighScore({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Your high scores',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              color: Colors.orange.shade300),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('S/N', style: tableHeader),
-                Text('Score', style: tableHeader),
-                Text('Unanswered', style: tableHeader),
-                Text('Date', style: tableHeader)
-              ],
-            )),
-        Expanded(
-          child: BlocBuilder<StatsCubit, StatsState>(
-            builder: (context, state) {
-              if (state is StatsLoaded) {
-                final data = state.stats;
-                return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: (data.length < 10) ? data.length : 10,
-                    itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${(index + 1).toString()}.',
-                                    style: tableHeader.copyWith(fontSize: 15),
-                                  ),
-                                  Text(
-                                    data[index].score.toString(),
-                                    style: tableBody,
-                                  ),
-                                  Text(
-                                    data[index].unanswered.toString(),
-                                    style: tableBody,
-                                  ),
-                                  Text(
-                                    (DateFormat('dd-MM-yy')
-                                        .format(data[index].date)),
-                                    style: tableBody,
-                                  )
-                                ],
-                              ),
-                              const Divider()
-                            ],
-                          ),
-                        ));
-              }
-              return Container();
-            },
-          ),
-        ),
-      ],
-    );
+  Future<bool> confirmDelete(BuildContext context) async {
+    return await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+                  content: const Text(
+                      'Are you sure you want to clear your statistics?'),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('Cancel')),
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: const Text('Delete'))
+                  ],
+                )) ??
+        false;
   }
 }

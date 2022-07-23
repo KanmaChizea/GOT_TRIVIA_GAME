@@ -7,6 +7,7 @@ import 'package:got_trivia_game/logic/cubit/stats_cubit.dart';
 import '../../logic/bloc/questions_bloc.dart';
 import '../../utils/clicksound.dart';
 import '../components/got_text.dart';
+import '../components/iconbutton.dart';
 import '../styles/buttons.dart';
 import '../styles/colors.dart';
 
@@ -79,52 +80,6 @@ class MainMenu extends StatelessWidget {
           ],
         )
       ]),
-    );
-  }
-}
-
-class MenuIconButtons extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onPressed;
-  final IconData secondaryIcon;
-  const MenuIconButtons({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-    required this.secondaryIcon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: white, width: 2),
-      ),
-      child: IconButton(
-        onPressed: () {
-          playClick(context);
-
-          onPressed();
-        },
-        color: white,
-        icon: (icon == Icons.music_note)
-            ? BlocBuilder<SoundCubit, AudioState>(builder: (context, state) {
-                if (state is AudioOn) {
-                  return Icon(icon);
-                } else {
-                  return Icon(secondaryIcon);
-                }
-              })
-            : BlocBuilder<MusicCubit, AudioState>(builder: (context, state) {
-                if (state is AudioOn) {
-                  return Icon(icon);
-                } else {
-                  return Icon(secondaryIcon);
-                }
-              }),
-        iconSize: 24,
-      ),
     );
   }
 }
