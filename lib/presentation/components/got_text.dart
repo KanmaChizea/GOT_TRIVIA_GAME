@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/styles/colors.dart';
+
+import '../styles/colors.dart';
 
 class GOTtext extends StatelessWidget {
   const GOTtext({
@@ -10,7 +11,7 @@ class GOTtext extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Center(child: Image.asset('lib/assets/logo.png')),
+        Center(child: Image.asset('assets/logo.png')),
         Align(
           alignment: Alignment.center,
           child: Text(

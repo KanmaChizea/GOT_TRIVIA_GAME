@@ -1,24 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:got_trivia_game/data/audio.dart';
 import 'package:got_trivia_game/globals.dart';
+import 'package:got_trivia_game/logic/cubit/audio_cubit.dart';
+import 'package:got_trivia_game/logic/cubit/number_handler.dart';
 import 'package:got_trivia_game/logic/cubit/result_handler.dart';
-import 'package:got_trivia_game/styles/colors.dart';
-import 'package:got_trivia_game/styles/texts.dart';
-import 'package:provider/provider.dart';
+import 'package:got_trivia_game/main.dart';
+
+import '../../logic/bloc/questions_bloc.dart';
+import '../../logic/cubit/stats_cubit.dart';
+import '../../utils/clicksound.dart';
+import '../styles/colors.dart';
+import '../styles/texts.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (context.read<MusicCubit>().state is AudioOn) {
+      musicController.pause();
+      AudioController(filename: 'result.wav')
+        ..play()
+        ..onComplete((p0) => musicController.loop());
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         leadingWidth: 100,
         leading: TextButton.icon(
-            onPressed: () => Navigator.of(context)
-                .pushNamedAndRemoveUntil('/', (route) => false),
+            onPressed: () {
+              playClick(context);
+
+              context.read<NumberHandlerCubit>().reset();
+              BlocProvider.of<QuestionsBloc>(context).add(NoQuestions());
+              Future.delayed(
+                  const Duration(seconds: 1),
+                  () => Navigator.of(context)
+                      .pushNamedAndRemoveUntil('/', (route) => false));
+            },
             icon: const Icon(Icons.home_outlined),
             label: const Text('Home'),
             style: TextButton.styleFrom(
@@ -28,7 +50,13 @@ class ResultScreen extends StatelessWidget {
         actions: [
           TextButton.icon(
             onPressed: () {
-              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+              playClick(context);
+
+              context.read<NumberHandlerCubit>().reset();
+              (Future.delayed(
+                  const Duration(seconds: 1),
+                  () => SystemChannels.platform
+                      .invokeMethod('SystemNavigator.pop')));
             },
             icon: const Icon(Icons.exit_to_app),
             label: const Text('Exit'),
@@ -52,7 +80,13 @@ class ResultScreen extends StatelessWidget {
             Text(context.read<ResultHandlerCubit>().state.message, style: body),
             Flexible(child: Container()),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                playClick(context);
+                context.read<NumberHandlerCubit>().reset();
+                BlocProvider.of<QuestionsBloc>(context).add(LoadQuestions());
+                Future.delayed(const Duration(seconds: 1),
+                    () => Navigator.of(context).pushNamed('/'));
+              },
               icon: const Icon(Icons.replay),
               label: const Text('Play again'),
               style: TextButton.styleFrom(
@@ -63,7 +97,12 @@ class ResultScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                playClick(context);
+                context.read<StatsCubit>().getStats();
+                Future.delayed(const Duration(seconds: 1),
+                    () => Navigator.of(context).pushNamed('stats'));
+              },
               icon: const Icon(Icons.bar_chart_outlined),
               label: const Text('Statistics'),
               style: TextButton.styleFrom(

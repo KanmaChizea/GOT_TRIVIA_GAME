@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:got_trivia_game/screens/loading.dart';
-import 'package:got_trivia_game/screens/no_network.dart';
-import 'package:got_trivia_game/screens/questions_screen.dart';
-
-import '../logic/bloc/questions_bloc.dart';
+import '../../logic/bloc/questions_bloc.dart';
+import 'loading.dart';
 import 'menu.dart';
+import 'no_network.dart';
+import 'questions_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

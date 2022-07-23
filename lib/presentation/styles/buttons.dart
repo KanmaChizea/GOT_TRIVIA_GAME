@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/styles/colors.dart';
+
+import 'colors.dart';
 
 final elevatedButtonStyle = ElevatedButton.styleFrom(
     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),

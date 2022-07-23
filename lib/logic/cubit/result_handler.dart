@@ -1,17 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:got_trivia_game/services/database/database.dart';
+import 'package:got_trivia_game/data/models/results.dart';
+import 'package:hive/hive.dart';
 
+import '../../data/database/stat_db.dart';
 import '../../data/models/questions.dart';
-import '../../data/models/results.dart';
 
 class ResultHandlerCubit extends Cubit<Result> {
   ResultHandlerCubit() : super(Result(correct: 0, incorrect: 0, unanswered: 0));
 
-  void processResult(List<Questions> questions) {
-    MyDatabase dbase = MyDatabase();
+  Box<StatsData> box = Hive.box('stats');
 
-    final result = Result.fromQuestions(questions);
-    dbase.addScore(score: result.correct, unanswered: result.unanswered);
-    emit(result);
+  void processResult(List<Questions> questions) {
+    box.add(StatsData.fromQuestions(questions));
+
+    emit(Result.fromQuestions(questions));
   }
 }

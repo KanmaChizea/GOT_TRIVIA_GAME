@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:got_trivia_game/logic/cubit/audio_cubit.dart';
 
-import '../logic/cubit/number_handler.dart';
+import '../../data/audio.dart';
+import '../../logic/cubit/number_handler.dart';
 
 class CountdownTimer extends StatefulWidget {
   final AnimationController controller;
@@ -52,21 +54,23 @@ class _CountdownTimerState extends State<CountdownTimer>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
         animation: controller,
-        builder: (context, child) => Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(
-                      backgroundColor: Colors.grey.shade300,
-                      color: Colors.red,
-                      strokeWidth: 4,
-                      value: animation.value / 10),
-                ),
-                Text(countText,
-                    style: const TextStyle(color: Colors.white, fontSize: 15)),
-              ],
-            ));
+        builder: (context, child) {
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(
+                    backgroundColor: Colors.grey.shade300,
+                    color: Colors.red,
+                    strokeWidth: 4,
+                    value: animation.value / 10),
+              ),
+              Text(countText,
+                  style: const TextStyle(color: Colors.white, fontSize: 15)),
+            ],
+          );
+        });
   }
 }

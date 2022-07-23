@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:got_trivia_game/styles/colors.dart';
+
+import 'colors.dart';
 
 const TextStyle headings =
     TextStyle(fontSize: 25, color: grey, fontWeight: FontWeight.bold);
